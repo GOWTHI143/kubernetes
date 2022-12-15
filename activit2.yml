@@ -1,0 +1,22 @@
+
+# jenkins & Nginix in one pod -2 
+
+---
+apiVersion: v1
+kind: Pod
+metadata: two-pods
+spec: 
+  containers:
+    - image: jenkins/jenkins
+      name: jenkins-con
+      ports:
+        - ContainerPort: 8080
+          protocol: TCP 
+    - image: nginx:latest 
+      name: nginx-con
+      ports: 
+        - ContainerPort: 80 
+          protocol: TCP 
+# end of activity 2
+
+

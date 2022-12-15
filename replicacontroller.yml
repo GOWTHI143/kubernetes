@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind:	ReplicationController
+metadata:
+  name: nginx-con1 # about replication controller
+spec:              # Replication controller spec
+  minReadySeconds: 5
+  replicas: 3
+  selector:         # which basis pod to be replicated
+    app: nginx
+  template:         # POd template & SPEC
+      name: nginx-con1
+  labels:
+    app: nginx 
+    ver: 1.23
+  spec:
+    containers:
+      - name: nginx
+        image: nginx:1.23
+        ports:
+          - containerPort: 80
+            protocol: TCP
+  

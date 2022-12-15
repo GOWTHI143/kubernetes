@@ -1,0 +1,38 @@
+# main difference in replica set is  through replica set history of deplyment is available
+# and rollback can be done easily
+
+# Replica set for jenkins
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:               # meta data for replication set
+  name: jenkins-pod
+  labels:
+    app: jenkins
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:             # have to specify for replica set to create replicas 
+    matchExpressions:   # we can also use matchlabels also in selector
+      - {key: app, operator: In, values: jenkins}
+  template:
+    metadata:           # metadata for jenkins pod 
+      name: jenkins-con
+      labels: 
+        app: jenkins
+        environment: qa
+    spec:
+      containers:
+        restartPolicy: Never
+        name: jenkins
+        image: jenkins:2.60.3
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+      initContainers:             # manifest for init container
+        name: ping-alp
+        image: alpine:3.17
+        command: 
+          - ["ping", "-c", "4", "google.com"]
+
+
