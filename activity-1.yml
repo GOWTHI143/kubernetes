@@ -1,10 +1,12 @@
 ---
 apiVersion: v1
 kind: Pod
-metadata: frst-pod
+metadata:
+  name: frst-pod
 spec:
   containers:
     - image: nginx:latest
       name: ngx
       ports:
-        - ContainerPort: 80 
+        - containerPort: 80
+          protocol: TCP
