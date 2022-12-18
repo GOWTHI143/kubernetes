@@ -32,7 +32,6 @@ spec:
       initContainers:             # manifest for init container
         - name: ping-alp
           image: alpine:3.17
-          command: 
-            - ["ping", "-c", "4", "google.com"]
+          command: ["ping", "-c", "4", "google.com"]
 
 
