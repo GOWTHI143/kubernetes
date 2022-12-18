@@ -9,7 +9,7 @@ spec:              # Replication controller spec
   selector:         # which basis pod to be replicated
     app: nginx
   template:         # POd template & SPEC
-      name: nginx-con1
+    name: nginx-con1
   labels:
     app: nginx 
     ver: 1.23
