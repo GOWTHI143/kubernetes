@@ -14,9 +14,7 @@ spec:
   replicas: 3
   selector:             # have to specify for replica set to create replicas 
     matchExpressions:   # we can also use matchlabels also in selector
-      - key: app
-        operator: In
-        values: jenkins
+      - {key: app, operator: In, values: [jenkins]}
   template:
     metadata:           # metadata for jenkins pod 
       name: jenkins-con
