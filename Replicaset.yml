@@ -23,8 +23,7 @@ spec:
         environment: qa
     spec:
       containers:
-        - restartPolicy: Never
-          name: jenkins
+        - name: jenkins
           image: jenkins:2.60.3
           ports:
             - containerPort: 8080
