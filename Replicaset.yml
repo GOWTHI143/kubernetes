@@ -28,9 +28,5 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
-      initContainers:             # manifest for init container
-        - name: ping-alp
-          image: alpine:3.17.0
-          command: ["ping", "-c", "4", "google.com"]
 
 
