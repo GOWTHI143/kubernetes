@@ -10,12 +10,12 @@ spec:
     - image: jenkins/jenkins
       name: jenkins-con
       ports:
-        - ContainerPort: 8080
+        - containerPort: 8080
           protocol: TCP 
     - image: nginx:latest 
       name: nginx-con
       ports: 
-        - ContainerPort: 80 
+        - containerPort: 80 
           protocol: TCP 
 # end of activity 2
 
