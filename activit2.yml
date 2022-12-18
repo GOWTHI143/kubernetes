@@ -4,7 +4,8 @@
 ---
 apiVersion: v1
 kind: Pod
-metadata: two-pods
+metadata:
+  name: two-pods
 spec: 
   containers:
     - image: jenkins/jenkins
