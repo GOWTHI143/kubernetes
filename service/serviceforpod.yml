@@ -1,0 +1,16 @@
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  name: spc-svc
+spec:
+  type: LoadBalancer
+  selector:
+      app: spc
+  ports:
+    - name: web_port
+      port: 4000
+      targetPort: 8080
+
+
+
