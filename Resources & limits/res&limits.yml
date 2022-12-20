@@ -1,0 +1,33 @@
+# For a pod, Replicaset and Replication controller while giving the pod specification 
+# resources and limits are defined while specifing pod specs  "resources"
+--- 
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: spc-pods
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: spc
+  template:
+    metadata:
+      name: spc-pods 
+      labels: 
+        app: spc
+        env: qa
+    spec:
+      containers:
+        - name: spc-pods
+          image: gowthi1404/spc:1.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: 
+            requests:
+              cpu: "512m"
+              memory: "128Mi"
+            limits:
+              cpu: "700m"
+              memory: "512Mi"
