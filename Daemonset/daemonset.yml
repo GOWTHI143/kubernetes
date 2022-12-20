@@ -1,0 +1,22 @@
+--- 
+apiVersion: apps/v1 
+kind: DaemonSet
+metadata:
+  name: dameonset-pods
+spec: 
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: apache-tomcat
+  template:
+    metadata:
+      name: apache-pod
+      labels:
+        app: apache-tomcat
+        ver: "1.0"
+    containers: 
+      - name: apache-pod
+        image: httpd:2.4
+        ports:
+          - containerPort: 80
+            protocol: TCP
