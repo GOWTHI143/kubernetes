@@ -3,6 +3,7 @@ apiVerion: apps/v1
 kind: Deployment
 metadata: 
   name: update-deployment
+  kubernetes.io/change-cause: updated-version
 spec:
   minReadySeconds: 5
   replicas: 3

@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: jenkins
+      kubernetes.io/change-cause: first-version
   strategy:
     type: RollingUpdate
     rollingUpdate:
