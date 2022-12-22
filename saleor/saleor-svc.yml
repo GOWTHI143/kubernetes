@@ -1,0 +1,30 @@
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  name: saleor-svc
+spec:
+  type: LoadBalancer
+  selector:
+      app: saleor
+  ports:
+    - name: saleor-dashboard-svc
+      port: 4000
+      targetPort: 80
+    - name: saleor-core-svc
+      port: 4010
+      targetPort: 8000
+
+# --- 
+# apiVersion: v1
+# kind: Service
+# metadata: 
+#   name: saleor-svc
+# spec:
+#   type: LoadBalancer
+#   selector:
+#       app: spc
+#   ports:
+#     - name: web_port
+#       port: 4000
+#       targetPort: 8080

@@ -4,10 +4,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: saleor_core
+  labels:
+    app: saleor
   kubernetes.io/change-cause: first-deploy
 spec:
   minReadySeconds: 5
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: sa-core

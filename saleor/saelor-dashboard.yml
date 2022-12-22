@@ -1,0 +1,23 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saleor-dashboard
+  labels:
+    app: saleor
+  kubernetes.io/change-cause: first-deploy
+spec:
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata: saleor_dashboard
+      labels:
+        app: dashboard
+    spec:
+      containers:
+      - name: saleor-dashboard
+        image: gowthi1404/saleor-dashboard:dev-19122022
+        ports:
+        - containerPort: 80
+          protocol: TCP 
