@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: postgres 
 spec:
+  minReadySeconds: 5
   replicas: 1
   selector:
     matchLabels:
