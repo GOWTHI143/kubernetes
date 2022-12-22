@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-svc-pod
+spec: 
+  type: LoadBalancer
+  selector:
+    app: jenkins
+  ports:
+    - name: jenkins-web-port
+      port: 60000
+      targetPort: 8080
