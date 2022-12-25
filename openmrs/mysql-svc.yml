@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: openmrs-app
+    app: mysql-db
   ports:
   - port: 5010
     targetPort: 8080

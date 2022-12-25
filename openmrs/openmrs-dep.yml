@@ -4,6 +4,7 @@ kind: Deployment
 metadata: 
   name: openmrs-deploy
 spec:
+  minReadySeconds: 10
   replicas: 2
   selector:
     matchLabels:
@@ -23,23 +24,27 @@ spec:
       containers:
         - name: openmrs-pods
           image: sai3369/openmrs:latest
+          command: 
+            - catalina.sh
+            - run
+            - 0.0.0.0:8080
+          env: 
+            - name:  OMRS_DB_HOSTNAME
+              value: gowtham
+            - name: OMRS_DB_NAME
+              value: openmrs
+            - name:  OMRS_DB_USERNAME
+              value: gowtham
+            - name:  OMRS_DB_PASSWORD
+              value: gowtham123
+            - name: OMRS_ADMIN_USER_PASSWORD
+              value: gowtham
           ports:
             - containerPort: 8080
               protocol: TCP
-          env: 
-            - name: MYSQL_DATABASE
-              value: gow
-            - name: MYSQL_USER
-              value: gowtham
-            - name: MYSQL_PASSWORD
-              value: gowtham
           volumeMounts:
-            - mountPath: "/app"
+            - mountPath: /openmrs/data/
               name: openmrs-app-storage
-          resources:
-            limits:
-              memory: 2Gi
-              cpu: "1"
       volumes:
         - name: openmrs-app-storage
           persistentVolumeClaim:

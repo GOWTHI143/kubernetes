@@ -22,29 +22,25 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:8.0
+          image: mysql-8-debian
           ports:
             - containerPort: 3306
               protocol: TCP
           env: 
-            - name: MYSQL_DATABASE
-              value: gow
-            - name: MYSQL_ROOT_PASSWORD
+            - name:  OMRS_DB_HOSTNAME
+              value: gowtham
+            - name: OMRS_DB_NAME
+              value: openmrs
+            - name:  OMRS_DB_USERNAME
+              value: gowtham
+            - name:  OMRS_DB_PASSWORD
               value: gowtham123
-            - name: MYSQL_USER
+            - name: OMRS_ADMIN_USER_PASSWORD
               value: gowtham
-            - name: MYSQL_PASSWORD
-              value: gowtham
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "2"
-            limits:
-              memory: "512Mi"
-              cpu: "4"
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mysql-vol
+          
       volumes:
         - name: mysql-vol
           persistentVolumeClaim:
