@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gameoflife-dep
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gameoflife-pod
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: gameoflife
+      labels: 
+        app: gameoflife-pod
+        ver: "1"
+    spec:
+      containers:
+        - name: gameoflife-pod
+          image: gowthi1404/gol:2.1
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          command:
+            - catalina.sh
+            - run
+            - "0.0.0.0:8080"

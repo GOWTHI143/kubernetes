@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: openmrs-app
+  ports:
+  - port: 5010
+    targetPort: 8080

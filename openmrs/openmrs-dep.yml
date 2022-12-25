@@ -1,0 +1,46 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: openmrs-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: openmrs-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: openmrs-pod
+      labels:
+        app: openmrs-app
+        ver: "1.0"
+    spec:
+      containers:
+        - name: openmrs-pods
+          image: sai3369/openmrs:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env: 
+            - name: MYSQL_DATABASE
+              value: gow
+            - name: MYSQL_USER
+              value: gowtham
+            - name: MYSQL_PASSWORD
+              value: gowtham
+          volumeMounts:
+            - mountPath: "/app"
+              name: openmrs-app-storage
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: "1"
+      volumes:
+        - name: openmrs-app-storage
+          persistentVolumeClaim:
+            claimName: openmrs-pvc

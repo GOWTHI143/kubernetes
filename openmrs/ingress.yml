@@ -1,0 +1,70 @@
+--- 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: first-ingress
+  annotations: 
+    kubernetes.io/ingress.class: "aws/alb"
+spec:
+  rules:
+    http:
+      paths:
+        - path: '*/4000/gameoflife'  
+          backend:
+            serviceName: "gameoflife"
+            servicePort: 8080
+          pathType: Exact
+        - path: '*/5000/openmrs-core'
+          backend:
+            serviceName: "openmrs"
+            servicePort: 8080
+          pathType: Exact
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spec:
+  rules:
+    - host: 2048.example.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: "service-2048"
+              servicePort: 80
