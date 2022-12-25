@@ -4,9 +4,9 @@ kind: PersistentVolume
 metadata: 
   name: openmrs-pvc
 spec:
+  storageClassName: gp2
   accessModes:
     - ReadWriteOnce
-  storageClassName: gp2
   resources:
     requests:
       storage: "500mi"
