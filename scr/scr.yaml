@@ -39,9 +39,16 @@ spec:
               value: gowtham
             - name: MYSQL_PASSWORD
               value: gowtham@123
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-vol
+      volumes:
+      - name: mysql-vol
+        persistentVolumeClaim:
+          claimName: pvc-claim
+          readOnly: false  
          
-      
-      
+
 ---  
 apiVersion: v1
 kind: Service
@@ -52,7 +59,6 @@ spec:
   selector: 
     app: scr
   ports:
-    - name: scr-port
-      type: TCP 
+    - name: scr-port 
       port: 8080
       targetPort: 8080
