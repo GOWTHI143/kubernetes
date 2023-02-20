@@ -36,10 +36,10 @@ spec:
               value: gowtham
             - name: MYSQL_PASSWORD
               value: gowtham@123
-      ports:
-        containerPort: 8080
-        protocol: TCP 
-        name: webport
+          ports:
+            - containerPort: 8080
+              protocol: TCP 
+              name: webport
       
       
 --- 
