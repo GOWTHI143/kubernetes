@@ -25,6 +25,10 @@ spec:
       containers:
         - image: gowthi1404/scr:1.0
           name: scr
+          ports:
+            - containerPort: 8080
+              protocol: TCP 
+              name: webport
           env:
             - name: MYSQL_HOST
               value: sql-service
@@ -36,10 +40,7 @@ spec:
               value: gowtham
             - name: MYSQL_PASSWORD
               value: gowtham@123
-          ports:
-            - containerPort: 8080
-              protocol: TCP 
-              name: webport
+         
       
       
 --- 
