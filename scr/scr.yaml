@@ -24,22 +24,23 @@ spec:
       activeDeadlineSeconds: 5
       containers:
         - image: gowthi1404/scr:1.0
-          imagePullPolicy: IfNotPresent
+          name: scr
+          env:
+            - name: MYSQL_HOST
+              value: sql-service
+            - name: MYSQL_DATABASE
+              value: courses
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootroot
+            - name: MYSQL_USER
+              value: gowtham
+            - name: MYSQL_PASSWORD
+              value: gowtham@123
       ports:
         containerPort: 8080
         protocol: TCP 
         name: webport
-      env:
-        - name: MYSQL_HOST
-          value: sql-service
-        - name: MYSQL_DATABASE
-          value: courses
-        - name: MYSQL_ROOT_PASSWORD
-          value: rootroot
-        - name: MYSQL_USER
-          value: gowtham
-        - name: MYSQL_PASSWORD
-          value: gowtham@123
+      
       
 --- 
 kind: Service 
