@@ -1,0 +1,33 @@
+---
+kind: ConfigMap
+apiVersion: core/v1
+metadata: 
+  name:  configmap
+data:
+  game.properties: |
+    enemy.types=aliens,monsters
+    player.maximum-lives=5    
+  user-interface.properties: |
+    color.good=purple
+    color.bad=yellow
+    allow.textmode=true
+    
+---
+kind:
+apiVersion:
+metadata:
+spec:
+  containers:
+    - name: pod 
+      image: ubuntu:22.04
+      volumeMounts:
+        - name: myconfig
+          mountPath: /configs
+  volumes: 
+    - name: myconfig
+      configMap:
+        name: configmap
+--- # as env
+envFrom:
+  - confiMapRef:
+      name: myconfig

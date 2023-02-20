@@ -1,0 +1,56 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nop-dep
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nop
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: nop-pod
+      labels:
+        app: nop
+        ver: "4.50"
+    spec:
+      containers:
+        - name: nop-pod
+          image: gowthi1404/nop:4.0
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: MYSQL_DB_HOSTNAME
+              value: clusterIp:mysql-service
+            - name: MYSQL_ROOT_PASSWORD
+              value: gowtham
+            - name: MYSQL_DATABASE
+              value: openmrs-db
+            - name: MYSQL_USER
+              value: sai
+            - name: MYSQL_PASSWORD
+              value: gowtham
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nop-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: nop
+  ports:
+    - name: openmrs-svc
+      port: 5000
+      targetport: 80
+

@@ -1,0 +1,12 @@
+--- 
+kind: PersistentVolumeClaim
+apiVersion: v1 
+metadata:
+  name: pvc-claim
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  storageClassName: STANDARD
+  resources:
+    requests:
+      storage: iGi

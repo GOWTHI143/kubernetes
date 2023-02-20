@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spc-deploy
+spec:
+  minReadySeconds: 5
+  replicas: 4
+  selector:
+    matchLabels:
+      app: spc
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: spc-pod
+      labels:
+        app: spc
+        ver: "1.0"
+    spec: 
+      containers:
+        - name: spc-pod
+          iamge: gowthi1404/spc:1.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          command:
+            - java
+            - -jar
+            - spring-petclinic-2.7.3.jar
+
+--- 
+kind: 	Service
+apiVersion: core/v1
+metadata:
+  name: spc-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: spc
+  ports:
+    - name: web-port
+      containerPort: 33000
+      targetPort: 8080
+
+
+
+
+

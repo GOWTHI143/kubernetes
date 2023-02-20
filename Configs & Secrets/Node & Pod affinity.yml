@@ -1,0 +1,13 @@
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution: # used where there is mentioning resource lable
+      nodeSelectorTerms:
+        matchExpressions: #by node's labels
+          - key: 
+            operator:
+            values:
+              - 
+        matchFields: # by node's fields.
+          
+    preferredDuringSchedulingIgnoredDuringExecution: # used to get applied when resources updated later 
+  podAffinity:

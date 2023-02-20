@@ -1,0 +1,62 @@
+--- 
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mysql-dep
+spec:
+  minReadySeconds: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql-pod
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: gowtham
+            - name: MYSQL_DATABASE
+              value: openmrs-db
+            - name: MYSQL_USER
+              value: sai
+            - name: MYSQL_PASSWORD
+              value: gowtham
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-vol
+      volumes:
+        - name: mysql-vol
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
+# service for mysql
+--- 
+kind: Service
+apiVersion: core/v1
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysql
+  type: ClusterIP
+  ports:
+    - name: mysql-port
+      port: 5555
+      targetPort: 3306
+
+
+            
