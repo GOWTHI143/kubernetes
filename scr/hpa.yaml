@@ -1,0 +1,39 @@
+--- 
+kind: HorizontalpodAutoscaler 
+apiVersion: autoscaling/v2
+metadata:
+  name: scr-autoscaling
+spec:
+  maxReplicas: 8
+  minReplicas: 5
+  metrics:
+    - type: Resource 
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    # - type: External
+    #   metric:
+    #   name: queue_messages_ready
+    #   selector:
+    #     matchLabels:
+    #       queue: "worker_tasks"
+    #   target:
+    #     type: AverageValue
+    #     averageValue: 30
+    # - type: Object
+    #   object:
+    #   metric:
+    #     name: requests-per-second
+    #   describedObject:
+    #     apiVersion: networking.k8s.io/v1
+    #     kind: Ingress
+    #     name: main-route
+    #   current:
+    #     value: 10k
+  scaleTargetRef:
+    apiversion: apps/v1
+    kind: Deployment 
+    name: scr-deployment
+  
