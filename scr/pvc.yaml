@@ -9,4 +9,4 @@ spec:
   storageClassName: STANDARD
   resources:
     requests:
-      storage: iGi
+      storage: 1Gi

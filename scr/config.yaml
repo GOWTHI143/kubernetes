@@ -1,0 +1,8 @@
+--- 
+apiVersion: core/v1
+kind: 	ConfigMap
+metadata:
+  name: scr-config
+data:
+  sql_user: gowtham
+  root_password: rootroot

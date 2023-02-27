@@ -34,11 +34,20 @@ spec:
             - name: MYSQL_DATABASE
               value: courses
             - name: MYSQL_ROOT_PASSWORD
-              value: rootroot
+              valueFrom:
+                configMapKeyRef:
+                  name: scr-config
+                  key: root_password
             - name: MYSQL_USER
-              value: gowtham
+              valueFrom:
+                configMapKeyRef:
+                  name: scr-config
+                  key: sql_user
             - name: MYSQL_PASSWORD
-              value: gowtham@123
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: password
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mysql-vol
